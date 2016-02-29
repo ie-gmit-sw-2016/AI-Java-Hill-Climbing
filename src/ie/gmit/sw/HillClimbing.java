@@ -3,12 +3,15 @@ package ie.gmit.sw;
 import java.util.*;
 
 public class HillClimbing {
-	LinkedList<Node> queue = new LinkedList<Node>();
-	List<Node> closed = new ArrayList<Node>();
-	HeuristicNodeComparator sorter = new HeuristicNodeComparator();
+	private LinkedList<Node> queue = new LinkedList<Node>();
+	private List<Node> closed = new ArrayList<Node>();
+	
 	public void search(Node node){
 		queue.addFirst(node);
 		while(!queue.isEmpty()){
+			// this is deepest ascent hill climbing, the algorithm will 
+			// not terminate until hit the goal node
+			// *** nb ***
 			queue.removeFirst();
 			closed.add(node);
 			System.out.print(node.getNodeName());
@@ -19,7 +22,10 @@ public class HillClimbing {
 				System.exit(0);
 			}else{
 				Node[] children = node.children();
-				Collections.sort(Arrays.asList(children), sorter);
+				
+				Arrays.sort(children, (Node current, Node next) -> 
+					- (current.getApproximateDistanceFromGoal() - next.getApproximateDistanceFromGoal()));
+				
 				for (int i = 0; i < children.length; i++) {
 					if (!children[i].isVisited() && !queue.contains(children[i])){
 						children[i].setParent(node);
