@@ -13,10 +13,10 @@ public class IrelandMap {
 		waterford.setGoalNode(true);
 		
 		
-		//Node athlone = new Node("Athlone", 90);
-		//athlone.addChildNode(galway, 80);
-		//athlone.addChildNode(belfast, 300);
-		//galway.addChildNode(athlone, 80);
+		Node athlone = new Node("Athlone", 90);
+		athlone.addChildNode(galway, 80);
+		athlone.addChildNode(belfast, 300);
+		galway.addChildNode(athlone, 80);
 
 		galway.addChildNode(limerick, 105);
 		galway.addChildNode(belfast, 306);
